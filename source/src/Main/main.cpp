@@ -2,8 +2,6 @@
 /*! \brief В этом файле объявлена главная функция проекта */
 
 #include "main.hpp"
-#include <nlohmann/json.hpp>
-#include <gtest/gtest.h>
 
 TEST(sample_test_case, sample_test)
 {

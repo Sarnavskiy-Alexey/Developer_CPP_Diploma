@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD 20)
 include_directories(
     inc
     inc/Main
+    inc/JSON_interaction
 )
 
 # Добавление сторонних библиотек
@@ -63,6 +64,9 @@ add_executable(
         
     inc/Main/main.hpp
     src/Main/main.cpp
+
+    inc/JSON_interaction/ConverterJSON.hpp
+    src/JSON_interaction/ConverterJSON.cpp
 )
 
 target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
