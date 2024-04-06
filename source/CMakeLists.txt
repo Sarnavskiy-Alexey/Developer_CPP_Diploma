@@ -12,6 +12,7 @@ include_directories(
     inc
     inc/Main
     inc/JSON_interaction
+    inc/InvertedIndex
 )
 
 # Добавление сторонних библиотек
@@ -67,7 +68,10 @@ add_executable(
 
     inc/JSON_interaction/ConverterJSON.hpp
     src/JSON_interaction/ConverterJSON.cpp
-)
+
+    inc/InvertedIndex/InvertedIndex.hpp
+    src/InvertedIndex/InvertedIndex.cpp
+    )
 
 target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
 

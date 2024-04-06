@@ -7,8 +7,10 @@
 
 #pragma once
 
-#include <filesystem>  // path
+#include <iostream>
 #include <nlohmann/json.hpp>
+#include <vector>
+#include <string>
 
 /*! \class ConverterJSON */
 /*! \brief Класс для взаимодействия с файлами JSON */
