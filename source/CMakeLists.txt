@@ -10,9 +10,6 @@ set(CMAKE_CXX_STANDARD 20)
 # Включение своих директорий
 include_directories(
     inc
-    inc/Main
-    inc/JSON_interaction
-    inc/InvertedIndex
 )
 
 # Добавление сторонних библиотек
@@ -63,14 +60,14 @@ enable_testing()
 add_executable(
     search_engine
         
-    inc/Main/main.hpp
-    src/Main/main.cpp
+    inc/main.hpp
+    src/main.cpp
 
-    inc/JSON_interaction/ConverterJSON.hpp
-    src/JSON_interaction/ConverterJSON.cpp
+    inc/ConverterJSON.hpp
+    src/ConverterJSON.cpp
 
-    inc/InvertedIndex/InvertedIndex.hpp
-    src/InvertedIndex/InvertedIndex.cpp
+    inc/InvertedIndex.hpp
+    src/InvertedIndex.cpp
     )
 
 target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
