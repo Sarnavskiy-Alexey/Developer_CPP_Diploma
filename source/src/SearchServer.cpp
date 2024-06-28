@@ -59,7 +59,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
             }
             std::sort(result_inner.begin(), result_inner.end(), [](RelativeIndex& a, RelativeIndex& b)
                                                                 {
-                                                                    return a.rank < b.rank;
+                                                                    return a.rank > b.rank || (a.rank > (b.rank - 0.000001) && a.rank < (b.rank + 0.000001) && a.doc_id < b.doc_id);
                                                                 });
         }
         if (response_limit < result_inner.size())
@@ -68,6 +68,19 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
         }
         result.push_back(result_inner);
     }
+
+    std::vector<std::vector<std::pair<int, float>>> result_pairs(result.size());
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        result_pairs[i].resize(result[i].size());
+        for (size_t j = 0; j < result[i].size(); j++)
+        {
+            result_pairs[i][j].first = result[i][j].doc_id;
+            result_pairs[i][j].second = result[i][j].rank;
+        }
+    }
+
+    converter.putAnswers(result_pairs);
 
 
 

@@ -12,3 +12,4 @@
 #include "SearchServer.hpp"
 
 void TestConverterJSONFunctionality();
+void TestSearchServerFunctionality();
