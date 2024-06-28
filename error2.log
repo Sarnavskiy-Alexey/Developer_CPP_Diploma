@@ -1,0 +1,92 @@
+[main] Building folder: diploma 
+[build] Starting build
+[proc] Executing command: "C:\Program Files\CMake\bin\cmake.EXE" --build c:/Study/skillbox/diploma/build --config Debug --target search_engine -j 22 --
+[build] [ 20%] Built target gtest
+[build] [ 40%] Built target gtest_main
+[build] [ 50%] Building CXX object CMakeFiles/search_engine.dir/src/main.cpp.obj
+[build] [ 60%] Building CXX object CMakeFiles/search_engine.dir/src/tests.cpp.obj
+[build] [ 70%] Building CXX object CMakeFiles/search_engine.dir/src/SearchServer.cpp.obj
+[build] [ 80%] Linking CXX executable search_engine.exe
+[build] CMake Error at C:/Program Files/CMake/share/cmake-3.30/Modules/GoogleTestAddTests.cmake:112 (message):
+[build]   Error running test executable.
+[build] 
+[build]     Path: 'C:/Study/skillbox/diploma/build/search_engine.exe'
+[build]     Working directory: 'C:/Study/skillbox/diploma/build'
+[build]     Result: 1
+[build]     Output:
+[build]       5
+[build]       File "C:\Study\skillbox\diploma\resources\file004.txt" does not exists!
+[build]       answer makes beatiful
+[build]       we are all different different as can be
+[build]       seaport is a ship home
+[build]       friends will be friends in all times
+[build]       some words..
+[build]       some words..
+[build]       some words..
+[build]       some words..
+[build]       [==========] Running 5 tests from 2 test suites.
+[build]       [----------] Global test environment set-up.
+[build]       [----------] 3 tests from TestCaseInvertedIndex
+[build]       [ RUN      ] TestCaseInvertedIndex.TestBasic
+[build]       C:\Study\skillbox\diploma\source\src\tests.cpp:56: Failure
+[build]       Expected equality of these values:
+[build]         result
+[build]           Which is: { { 16-byte object <00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00> }, { 16-byte object <00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00>, 16-byte object <01-00 00-00 00-00 00-00 03-00 00-00 00-00 00-00> } }
+[build]         expected
+[build]           Which is: { { 16-byte object <00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00> }, { 16-byte object <00-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00>, 16-byte object <01-00 00-00 00-00 00-00 03-00 00-00 00-00 00-00> } }
+[build]       [  FAILED  ] TestCaseInvertedIndex.TestBasic (2 ms)
+[build]       [ RUN      ] TestCaseInvertedIndex.TestBasic2
+[build]       C:\Study\skillbox\diploma\source\src\tests.cpp:56: Failure
+[build]       Expected equality of these values:
+[build]         result
+[build]           Which is: { { 16-byte object <00-00 00-00 00-00 00-00 04-00 00-00 00-00 00-00>, 16-byte object <01-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00>, 16-byte object <02-00 00-00 00-00 00-00 05-00 00-00 00-00 00-00> }, { 16-byte object <00-00 00-00 00-00 00-00 03-00 00-00 00-00 00-00>, 16-byte object <01-00 00-00 00-00 00-00 02-00 00-00 00-00 00-00>, 16-byte object <02-00 00-00 00-00 00-00 05-00 00-00 00-00 00-00> }, { 16-byte object <03-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00> } }
+[build]         expected
+[build]           Which is: { { 16-byte object <00-00 00-00 00-00 00-00 04-00 00-00 00-00 00-00>, 16-byte object <01-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00>, 16-byte object <02-00 00-00 00-00 00-00 05-00 00-00 00-00 00-00> }, { 16-byte object <00-00 00-00 00-00 00-00 02-00 00-00 00-00 00-00>, 16-byte object <01-00 00-00 00-00 00-00 02-00 00-00 00-00 00-00>, 16-byte object <02-00 00-00 00-00 00-00 05-00 00-00 00-00 00-00> }, { 16-byte object <03-00 00-00 00-00 00-00 01-00 00-00 00-00 00-00> } }
+[build]       [  FAILED  ] TestCaseInvertedIndex.TestBasic2 (0 ms)
+[build]       [ RUN      ] TestCaseInvertedIndex.TestInvertedIndexMissingWord
+[build]       [       OK ] TestCaseInvertedIndex.TestInvertedIndexMissingWord (0 ms)
+[build]       [----------] 3 tests from TestCaseInvertedIndex (2 ms total)
+[build]       
+[build]       [----------] 2 tests from TestCaseSearchServer
+[build]       [ RUN      ] TestCaseSearchServer.TestSimple
+[build]       C:\Study\skillbox\diploma\source\src\tests.cpp:208: Failure
+[build]       Expected equality of these values:
+[build]         result
+[build]           Which is: { { 16-byte object <01-00 00-00 00-00 00-00 9A-99 99-3E F6-7F 00-00>, 16-byte object <00-00 00-00 00-00 00-00 33-33 33-3F F6-7F 00-00>, 16-byte object <02-00 00-00 00-00 00-00 00-00 80-3F F6-7F 00-00> }, {} }
+[build]         expected
+[build]           Which is: { { 16-byte object <02-00 00-00 00-00 00-00 00-00 80-3F 26-02 00-00>, 16-byte object <00-00 00-00 00-00 00-00 33-33 33-3F 26-02 00-00>, 16-byte object <01-00 00-00 00-00 00-00 9A-99 99-3E F6-7F 00-00> }, {} }
+[build]       [  FAILED  ] TestCaseSearchServer.TestSimple (0 ms)
+[build]       [ RUN      ] TestCaseSearchServer.TestTop5
+[build]       C:\Study\skillbox\diploma\source\src\tests.cpp:254: Failure
+[build]       Expected equality of these values:
+[build]         result
+[build]           Which is: { { 16-byte object <0B-00 00-00 00-00 00-00 AB-AA 2A-3F F6-7F 00-00>, 16-byte object <15-00 00-00 00-00 00-00 AB-AA 2A-3F F6-7F 00-00>, 16-byte object <14-00 00-00 00-00 00-00 AB-AA 2A-3F F6-7F 00-00>, 16-byte object <13-00 00-00 00-00 00-00 AB-AA 2A-3F F6-7F 00-00>, 16-byte object <12-00 00-00 00-00 00-00 AB-AA 2A-3F F6-7F 00-00> } }
+[build]         expected
+[build]           Which is: { { 16-byte object <07-00 00-00 00-00 00-00 00-00 80-3F F6-7F 00-00>, 16-byte object <0E-00 00-00 00-00 00-00 00-00 80-3F 00-00 00-00>, 16-byte object <00-00 00-00 00-00 00-00 AB-AA 2A-3F 26-02 00-00>, 16-byte object <00-00 00-00 00-00 00-00 AB-AA 2A-3F 26-02 00-00>, 16-byte object <00-00 00-00 00-00 00-00 AB-AA 2A-3F F6-7F 00-00> } }
+[build]       [  FAILED  ] TestCaseSearchServer.TestTop5 (0 ms)
+[build]       [----------] 2 tests from TestCaseSearchServer (0 ms total)
+[build]       
+[build]       [----------] Global test environment tear-down
+[build]       [==========] 5 tests from 2 test suites ran. (3 ms total)
+[build]       [  PASSED  ] 1 test.
+[build]       [  FAILED  ] 4 tests, listed below:
+[build]       [  FAILED  ] TestCaseInvertedIndex.TestBasic
+[build]       [  FAILED  ] TestCaseInvertedIndex.TestBasic2
+[build]       [  FAILED  ] TestCaseSearchServer.TestSimple
+[build]       [  FAILED  ] TestCaseSearchServer.TestTop5
+[build]       
+[build]        4 FAILED TESTS
+[build]       
+[build] 
+[build] Call Stack (most recent call first):
+[build]   C:/Program Files/CMake/share/cmake-3.30/Modules/GoogleTestAddTests.cmake:226 (gtest_discover_tests_impl)
+[build] 
+[build] 
+[build] mingw32-make[3]: *** [CMakeFiles\search_engine.dir\build.make:170: search_engine.exe] Error 1
+[build] mingw32-make[3]: *** Deleting file 'search_engine.exe'
+[build] mingw32-make[2]: *** [CMakeFiles\Makefile2:154: CMakeFiles/search_engine.dir/all] Error 2
+[build] mingw32-make[1]: *** [CMakeFiles\Makefile2:161: CMakeFiles/search_engine.dir/rule] Error 2
+[build] mingw32-make: *** [Makefile:178: search_engine] Error 2
+[proc] The command: "C:\Program Files\CMake\bin\cmake.EXE" --build c:/Study/skillbox/diploma/build --config Debug --target search_engine -j 22 -- exited with code: 2
+[driver] Build completed: 00:00:04.064
+[build] Build finished with exit code 2

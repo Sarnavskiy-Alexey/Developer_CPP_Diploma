@@ -3,4 +3,12 @@
 
 #pragma once
 #include <iostream>
-// #include <gtest/gtest.h>
+#ifdef __TEST__
+#include <gtest/gtest.h>
+#endif /* __TEST__ */
+#include <fstream>
+#include "ConverterJSON.hpp"
+#include "InvertedIndex.hpp"
+#include "SearchServer.hpp"
+
+void TestConverterJSONFunctionality();

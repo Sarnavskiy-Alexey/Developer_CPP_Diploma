@@ -7,6 +7,9 @@ project("search_engine" VERSION 1.0)
 # Применяемый стандарт C++
 set(CMAKE_CXX_STANDARD 20)
 
+# Добавление отключаемого кода с помощью определения макроса (перед сборкой необходимо комментировать для отмены тестирования или раскомментировать для добавления тестирования)
+add_compile_definitions(__TEST__)
+
 # Включение своих директорий
 include_directories(
     inc
@@ -62,12 +65,16 @@ add_executable(
         
     inc/main.hpp
     src/main.cpp
+    src/tests.cpp
 
     inc/ConverterJSON.hpp
     src/ConverterJSON.cpp
 
     inc/InvertedIndex.hpp
     src/InvertedIndex.cpp
+    
+    inc/SearchServer.hpp
+    src/SearchServer.cpp
     )
 
 target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
