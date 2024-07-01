@@ -11,7 +11,6 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
 
     /* отсортированный список релевантных ответов на запросы */
     std::vector<std::vector<RelativeIndex>> result;
-
     for (size_t i = 0; i < queries_input.size(); i++)
     {
         std::vector<RelativeIndex> result_inner;

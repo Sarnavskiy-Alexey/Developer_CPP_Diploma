@@ -12,7 +12,7 @@
 std::vector<std::string> ConverterJSON::GetTextDocuments()
 {
     std::vector<std::string> result;
-    std::filesystem::path config_path = "../appendix/config.json";
+    std::filesystem::path config_path = relative_path_config;
 
     /* проверка на существование файла конфигурации */
     if (std::filesystem::exists(config_path))
@@ -70,9 +70,10 @@ std::vector<std::string> ConverterJSON::GetTextDocuments()
 
 int ConverterJSON::GetResponsesLimit()
 {
-    std::filesystem::path config_path = "../appendix/config.json";
+    std::filesystem::path config_path = relative_path_config;
     if (std::filesystem::exists(config_path))
     {
+        std::cout << "here3\n";
         std::ifstream config_file(std::filesystem::absolute(config_path).string());
         nlohmann::json config_data;
         config_file >> config_data;
@@ -82,6 +83,7 @@ int ConverterJSON::GetResponsesLimit()
     }
     else
     {
+        std::cout << "here4\n";
         throw ConfigJSONNotExistsException();
     }
     return 0;
@@ -90,7 +92,7 @@ int ConverterJSON::GetResponsesLimit()
 std::vector<std::string> ConverterJSON::GetRequests()
 {
     std::vector<std::string> result;
-    std::filesystem::path requests_path = "../appendix/requests.json";
+    std::filesystem::path requests_path = relative_path_requests;
     if (std::filesystem::exists(requests_path))
     {
         std::ifstream requests_file(std::filesystem::absolute(requests_path).string());
@@ -109,7 +111,7 @@ std::vector<std::string> ConverterJSON::GetRequests()
 
 void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> answers)
 {
-    std::filesystem::path answers_path = "../appendix/answers.json";
+    std::filesystem::path answers_path = relative_path_answers;
     std::ofstream answers_file;
     nlohmann::json answers_data;
     nlohmann::json requests;

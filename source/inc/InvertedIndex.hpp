@@ -19,7 +19,7 @@ struct Entry {
     /*! \brief Метод для сравнения двух структур Entry */
     /*! \details Данный оператор необходим для проведения текстовых сценариев */
     bool operator==(const Entry& other) const {
-        return (doc_id == other.doc_id && count == other.doc_id);
+        return (doc_id == other.doc_id && count == other.count);
     }
 };
 

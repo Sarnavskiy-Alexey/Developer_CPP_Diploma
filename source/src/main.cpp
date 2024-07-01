@@ -7,7 +7,7 @@
 /*! \returns 0 */
 int main(void)
 {
-    std::filesystem::path answers_file_path = "../appendix/answers.json";
+    std::filesystem::path answers_file_path = relative_path_answers;
     if (std::filesystem::exists(answers_file_path))
     {
         std::ifstream answers_file(std::filesystem::absolute(answers_file_path).string(), std::ios_base::trunc);
@@ -18,12 +18,6 @@ int main(void)
         std::ifstream answers_file(std::filesystem::absolute(answers_file_path).string());
         answers_file.close();
     }
-#ifdef __TEST__
-    // TestConverterJSONFunctionality();
-    // TestSearchServerFunctionality();
     ::testing::InitGoogleTest();
     return RUN_ALL_TESTS();
-#else
-    return 0;
-#endif /* __TEST__ */
 }
