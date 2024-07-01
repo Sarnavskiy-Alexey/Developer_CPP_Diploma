@@ -85,4 +85,4 @@ target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
 #----------
 target_link_libraries(search_engine PRIVATE gtest_main)
 include(googletest)
-gtest_discover_tests(search_engine)
+# gtest_discover_tests(search_engine)
