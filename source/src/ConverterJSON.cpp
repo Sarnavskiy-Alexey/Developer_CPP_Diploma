@@ -12,15 +12,10 @@
 std::vector<std::string> ConverterJSON::GetTextDocuments()
 {
     std::vector<std::string> result;
-    std::filesystem::path config_path = relative_path_config;
 
-    /* проверка на существование файла конфигурации */
-    if (std::filesystem::exists(config_path))
+    if (CheckConfigJSON())
     {
-        std::ifstream config_file(std::filesystem::absolute(config_path).string());
-        nlohmann::json config_data;
-        config_file >> config_data;
-        std::vector<std::string> files = config_data["files"];
+        std::vector<std::string> files = this->config_json_data["files"];
         std::vector<std::filesystem::path> file_paths;
         
         for (const std::string &f : files)
@@ -58,33 +53,25 @@ std::vector<std::string> ConverterJSON::GetTextDocuments()
                 std::cout << X.what() << std::endl;
             }
         }
+    }
 
-        config_file.close();
-    }
-    else
-    {
-        throw ConfigJSONNotExistsException();
-    }
     return result;
 }
 
 int ConverterJSON::GetResponsesLimit()
 {
     std::filesystem::path config_path = relative_path_config;
-    if (std::filesystem::exists(config_path))
-    {
-        std::cout << "here3\n";
-        std::ifstream config_file(std::filesystem::absolute(config_path).string());
-        nlohmann::json config_data;
-        config_file >> config_data;
-        config_file.close();
 
-        return config_data["config"]["max_responses"];
-    }
-    else
+    if (CheckConfigJSON())
     {
-        std::cout << "here4\n";
-        throw ConfigJSONNotExistsException();
+        if (this->config_json_data["config"].contains("max_responses"))
+        {
+            return this->config_json_data["config"]["max_responses"];
+        }
+        else
+        {
+            return 5;
+        }
     }
     return 0;
 }
@@ -92,21 +79,14 @@ int ConverterJSON::GetResponsesLimit()
 std::vector<std::string> ConverterJSON::GetRequests()
 {
     std::vector<std::string> result;
-    std::filesystem::path requests_path = relative_path_requests;
-    if (std::filesystem::exists(requests_path))
+    if (CheckRequestsJSON())
     {
-        std::ifstream requests_file(std::filesystem::absolute(requests_path).string());
-        nlohmann::json requests_data;
-        requests_file >> requests_data;
-        result = requests_data["requests"];
-        requests_file.close();
+        return this->requests_json_data["requests"];
     }
     else
     {
-        throw RequestsJSONNotExistsException();
+        return result;
     }
-
-    return result;
 }
 
 void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> answers)
@@ -156,4 +136,79 @@ void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> a
     {
         throw AnswersJSONNotExistsException();
     }
+}
+
+bool ConverterJSON::CheckConfigJSON()
+{
+    std::filesystem::path config_path = relative_path_config;
+
+    /* проверка на существование файла конфигурации */
+    if (std::filesystem::exists(config_path))
+    {
+        std::ifstream config_file(std::filesystem::absolute(config_path).string());
+        config_file >> this->config_json_data;
+        config_file.close();
+
+        /* проверка на существование полей в файле конфигурации */
+
+        if (this->config_json_data.contains("config"))
+        {
+            if (!this->config_json_data["config"].contains("name"))
+            {
+                throw NameFieldNotExistsException();
+            }
+
+            if (!this->config_json_data["config"].contains("version"))
+            {
+                throw VersionFieldNotExistsException();
+            }
+        }
+        else
+        {
+            throw ConfigFieldNotExistsException();
+        }
+
+        if (!this->config_json_data.contains("files"))
+        {
+            throw FilesFieldNotExistsException();
+        }
+    }
+    else
+    {
+        throw ConfigJSONNotExistsException();
+    }
+
+    return true;
+}
+
+bool ConverterJSON::CheckRequestsJSON()
+{
+    std::filesystem::path requests_path = relative_path_requests;
+    if (std::filesystem::exists(requests_path))
+    {
+        std::ifstream requests_file(std::filesystem::absolute(requests_path).string());
+        requests_file >> this->requests_json_data;
+        requests_file.close();
+
+        if (!this->requests_json_data.contains("requests"))
+        {
+            throw RequestsFieldNotExistsException();
+        }
+    }
+    else
+    {
+        throw RequestsJSONNotExistsException();
+    }
+
+    return true;
+}
+
+const std::string ConverterJSON::GetEngineName() const
+{
+    return this->config_json_data["config"]["name"];
+}
+
+const std::string ConverterJSON::GetEngineVersion() const
+{
+    return this->config_json_data["config"]["version"];
 }

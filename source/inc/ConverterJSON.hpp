@@ -37,28 +37,81 @@ public:
     /*! \returns Возвращает список запросов из файла requests.json */
     std::vector<std::string> GetRequests();
     
-    /*! \brief Положить в файл answers.json результаты поисковых запросов */
+    /*! \brief Метод кладет в файл answers.json результаты поисковых запросов */
     void putAnswers(std::vector<std::vector<std::pair<int, float>>> answers);
+
+    /*! \brief Метод для получения названия движка */
+    const std::string GetEngineName() const;
+
+    /*! \brief Метод для получения версии движка */
+    const std::string GetEngineVersion() const;
+private:
+    /*! \brief Метод для проверки содержимого файла config.json */
+    bool CheckConfigJSON();
+    
+    /*! \brief Метод для проверки содержимого файла requests.json */
+    bool CheckRequestsJSON();
+
+    /*! \brief Копия данных из файла конфигурации для более простого доступа */
+    nlohmann::json config_json_data;
+
+    /*! \brief Копия данных из файла запросов для более простого доступа */
+    nlohmann::json requests_json_data;
 };
 
 class ConfigJSONNotExistsException : std::exception {
 public:
     const char * what() const noexcept override {
-        return "File config.json does not exists!";
+        return "Config file is missing!";
+    }
+};
+
+class ConfigFieldNotExistsException : std::exception {
+public:
+    const char * what() const noexcept override {
+        return "Config file is empty!";
+    }
+};
+
+class NameFieldNotExistsException : std::exception {
+public:
+    const char * what() const noexcept override {
+        return "Name field is missing!";
+    }
+};
+
+class VersionFieldNotExistsException : std::exception {
+public:
+    const char * what() const noexcept override {
+        return "Version field is missing!";
+    }
+};
+
+class FilesFieldNotExistsException : std::exception {
+public:
+    const char * what() const noexcept override {
+        return "Files field is missing!";
     }
 };
 
 class RequestsJSONNotExistsException : std::exception {
 public:
     const char * what() const noexcept override {
-        return "File requests.json does not exists!";
+        return "Request file is missing!";
+    }
+};
+
+class RequestsFieldNotExistsException : std::exception {
+public:
+    const char * what() const noexcept override {
+        return "Requests field is missing!";
     }
 };
 
 class AnswersJSONNotExistsException : std::exception {
 public:
     const char * what() const noexcept override {
-        return "File answers.json does not exists!";
+        return "Answer file is missing!";
     }
 };
 

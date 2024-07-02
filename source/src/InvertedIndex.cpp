@@ -23,20 +23,26 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
     {
         std::stringstream buffer_stream(input_docs[i]);
         std::string word;
-        while (buffer_stream >> word)
+        int word_count = 1;
+        while (buffer_stream >> word && word_count < 1000)
         {
             /* если в буфере встретится пустое слово, то закончить обработку буфера */
             if (word.size() < 1)
             {
                 break;
             }
+            else if (word.size() > 100)
+            {
+                word.resize(100);
+            }
+            word_count++;
 
             /* если ключевое слово имеется в словаре, то... */
             if (this->freq_dictionary.find(word) != this->freq_dictionary.end())
             {
                 bool flag = false;
 
-                /* ... обновить значение count для соответствующего doc_id, ... */
+                /* ... обновить значение count для существующего doc_id, ... */
                 for (size_t j = 0; j < this->freq_dictionary[word].size(); j++)
                 {
                     if (this->freq_dictionary[word][j].doc_id == i)

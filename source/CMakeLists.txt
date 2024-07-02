@@ -7,6 +7,9 @@ project("search_engine" VERSION 1.0)
 # Применяемый стандарт C++
 set(CMAKE_CXX_STANDARD 20)
 
+# Для сборки с использованием тестов необходимо раскоментировать строку ниже
+add_compile_definitions(__TEST_SEARCH_ENGINE__)
+
 # Включение своих директорий
 include_directories(
     inc

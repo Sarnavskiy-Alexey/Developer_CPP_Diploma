@@ -144,17 +144,36 @@ TEST(TestCaseSearchServer, TestTop5)
         "warsaw is the capital of poland"
     };
     const std::vector<std::string> request = { "moscow is the capital of russia" };
-    const std::vector<std::vector<RelativeIndex>> expected =
+    std::vector<std::vector<RelativeIndex>> expected =
     {
         {
             { 7, 1 },
             { 14, 1 },
             { 0, 0.666666687 },
             { 1, 0.666666687 },
-            { 2, 0.666666687 }
+            { 2, 0.666666687 },
+            { 3, 0.666666687 },
+            { 4, 0.666666687 },
+            { 5, 0.666666687 },
+            { 6, 0.666666687 },
+            { 8, 0.666666687 },
+            { 9, 0.666666687 },
+            { 10, 0.666666687 },
+            { 11, 0.666666687 },
+            { 12, 0.666666687 },
+            { 13, 0.666666687 },
+            { 15, 0.666666687 },
+            { 16, 0.666666687 },
+            { 17, 0.666666687 },
+            { 18, 0.666666687 },
+            { 19, 0.666666687 },
+            { 20, 0.666666687 },
+            { 21, 0.666666687 }
         }
     };
 
+    ConverterJSON converter;
+    expected[0].resize(converter.GetResponsesLimit());
     InvertedIndex idx;
     idx.UpdateDocumentBase(docs);
     SearchServer srv(idx);
