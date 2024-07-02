@@ -33,12 +33,26 @@ int main(void)
 
     try
     {
+        /* создать объект-конвертер */
         ConverterJSON converter;
+
+        /* создать объект-индекс */
         InvertedIndex idx;
-        idx.UpdateDocumentBase(converter.GetTextDocuments());
-        
+
+        /* считать содержимое всех документов из файла конфигурации */
+        std::vector<std::string> documents = converter.GetTextDocuments();
+
+        /* Обновить базу данных документов в объекте-индексе */
+        idx.UpdateDocumentBase(documents);
+
+        /* создать объект-сервер */
         SearchServer server(idx);
-        server.search(converter.GetRequests());
+
+        /* получить все запросы из файла запросов */
+        std::vector<std::string> requests = converter.GetRequests();
+
+        /* получить результаты поиска (в файл answers.json) */
+        std::vector<std::vector<RelativeIndex>> search_result = server.search(requests);
     }
     catch (const ConfigJSONNotExistsException& X)
     {
