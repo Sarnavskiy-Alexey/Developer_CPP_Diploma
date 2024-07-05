@@ -27,7 +27,8 @@ int main(void)
     {
         std::cout << "Some errors occured while testing!\n";
     }
-    system("pause");
+    std::cout << "Enter any key to continue...";
+    std::getchar();
     clearAnswersJSON();
 #endif /* __TEST_SEARCH_ENGINE__ */
 
