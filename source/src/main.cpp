@@ -19,19 +19,8 @@ int main(void)
     
 #ifdef __TEST_SEARCH_ENGINE__
     ::testing::InitGoogleTest();
-    if (RUN_ALL_TESTS() == 0)
-    {
-        std::cout << "Tests competed succesfully!\n";
-    }
-    else
-    {
-        std::cout << "Some errors occured while testing!\n";
-    }
-    std::cout << "Enter any key to continue...";
-    std::getchar();
-    clearAnswersJSON();
-#endif /* __TEST_SEARCH_ENGINE__ */
-
+    return RUN_ALL_TESTS();
+#else /* __TEST_SEARCH_ENGINE__ */
     try
     {
         /* создать объект-конвертер */
@@ -79,6 +68,6 @@ int main(void)
     {
         std::cerr << X.what() << '\n';
     }
-
     return 0;
+#endif /* __TEST_SEARCH_ENGINE__ */
 }
