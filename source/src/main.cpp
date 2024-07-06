@@ -1,7 +1,15 @@
 /*! \file main.cpp */
 /*! \brief В этом файле объявлена главная функция проекта */
 
-#include "main.hpp"
+#include <iostream>
+#include <fstream>
+#include "ConverterJSON.hpp"
+#include "InvertedIndex.hpp"
+#include "SearchServer.hpp"
+
+#ifdef __TEST_SEARCH_ENGINE__
+#include "tests.hpp"
+#endif /* __TEST_SEARCH_ENGINE__ */
 
 /*! \brief Статическая функция для очистки/создания файла ответов */
 static void clearAnswersJSON()
@@ -18,8 +26,7 @@ int main(void)
     clearAnswersJSON();
     
 #ifdef __TEST_SEARCH_ENGINE__
-    ::testing::InitGoogleTest();
-    return RUN_ALL_TESTS();
+    run_tests();
 #else /* __TEST_SEARCH_ENGINE__ */
     try
     {

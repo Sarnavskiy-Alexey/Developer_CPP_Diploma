@@ -1,0 +1,18 @@
+{
+    "version": 9,
+    "configurePresets": [
+        {
+            "name": "GCC 13.2.0 x86_64-w64-mingw32 (ucrt64)",
+            "displayName": "TEST GCC 13.2.0 x86_64-w64-mingw32 (ucrt64)",
+            "description": "TEST Using compilers: C = gcc.exe, CXX = g++.exe",
+            "generator": "MinGW Makefiles",
+            "binaryDir": "${sourceDir}/../../build_test/",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/../../install_test/",
+                "CMAKE_C_COMPILER": "gcc.exe",
+                "CMAKE_CXX_COMPILER": "g++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
+    ]
+}

@@ -1,4 +1,5 @@
 .vscode/
 build/
+build_test/
 docs/Итоговый проект.pdf
 resources/file*.txt
