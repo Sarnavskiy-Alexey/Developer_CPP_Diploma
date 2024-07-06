@@ -67,6 +67,8 @@ add_executable(
 
     ../inc/SearchServer.hpp
     ../src/SearchServer.cpp
+
+    ../inc/exceptions.hpp
     )
 
 target_link_libraries(search_engine_test PRIVATE nlohmann_json::nlohmann_json)

@@ -6,6 +6,7 @@
 #include "ConverterJSON.hpp"
 #include "InvertedIndex.hpp"
 #include "SearchServer.hpp"
+#include "exceptions.hpp"
 
 #ifdef __TEST_SEARCH_ENGINE__
 #include "tests.hpp"

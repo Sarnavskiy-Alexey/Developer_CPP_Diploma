@@ -5,9 +5,10 @@
 /*! - для преобразования запросов в формате JSON */
 /*! - для формирования ответов в заданном формате JSON */
 
-#include "ConverterJSON.hpp"
 #include <fstream>
 #include <filesystem>
+#include "ConverterJSON.hpp"
+#include "exceptions.hpp"
 
 std::vector<std::string> ConverterJSON::GetTextDocuments()
 {
