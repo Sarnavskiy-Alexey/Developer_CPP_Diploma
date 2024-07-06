@@ -34,6 +34,8 @@ int main(void)
         /* создать объект-конвертер */
         ConverterJSON converter;
 
+        std::cout << "Engine: " << converter.GetEngineName() << " v." << converter.GetEngineVersion() << "\n";
+
         /* создать объект-индекс */
         InvertedIndex idx;
 

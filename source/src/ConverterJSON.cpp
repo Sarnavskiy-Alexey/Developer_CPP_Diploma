@@ -204,12 +204,38 @@ bool ConverterJSON::CheckRequestsJSON()
     return true;
 }
 
-const std::string ConverterJSON::GetEngineName() const
+const std::string ConverterJSON::GetEngineName()
 {
-    return this->config_json_data["config"]["name"];
+    std::filesystem::path config_path = relative_path_config;
+
+    if (CheckConfigJSON())
+    {
+        if (this->config_json_data["config"].contains("name"))
+        {
+            return this->config_json_data["config"]["name"];
+        }
+        else
+        {
+            return "no name";
+        }
+    }
+    return "no name";
 }
 
-const std::string ConverterJSON::GetEngineVersion() const
+const std::string ConverterJSON::GetEngineVersion()
 {
-    return this->config_json_data["config"]["version"];
+    std::filesystem::path config_path = relative_path_config;
+
+    if (CheckConfigJSON())
+    {
+        if (this->config_json_data["config"].contains("version"))
+        {
+            return this->config_json_data["config"]["version"];
+        }
+        else
+        {
+            return " no version";
+        }
+    }
+    return " no version";
 }

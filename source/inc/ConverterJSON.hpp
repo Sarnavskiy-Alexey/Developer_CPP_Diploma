@@ -40,10 +40,10 @@ public:
     void putAnswers(std::vector<std::vector<std::pair<int, float>>> answers);
 
     /*! \brief Метод для получения названия движка */
-    const std::string GetEngineName() const;
+    const std::string GetEngineName();
 
     /*! \brief Метод для получения версии движка */
-    const std::string GetEngineVersion() const;
+    const std::string GetEngineVersion();
 private:
     /*! \brief Метод для проверки содержимого файла config.json */
     bool CheckConfigJSON();
