@@ -59,13 +59,13 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
                 /* ... иначе добавить новый doc_id в вектор */
                 if (!flag)
                 {
-                    this->freq_dictionary[word].push_back({ .doc_id = i, .count = 1});
+                    this->freq_dictionary[word].emplace_back(Entry{.doc_id = i, .count = 1});
                 }
             }
             else
             {
                 this->freq_dictionary[word] = {};
-                this->freq_dictionary[word].push_back({ .doc_id = i, .count = 1 });
+                this->freq_dictionary[word].emplace_back(Entry{ .doc_id = i, .count = 1 });
             }
 
             freq_dictionary_mutex.unlock();
@@ -80,7 +80,7 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
     /* заполнение словаря */
     for (size_t i = 0; i < input_docs.size(); i++)
     {
-        threads.push_back(std::thread(func, i));
+        threads.emplace_back(func, i);
     }
     for (size_t i = 0; i < input_docs.size(); i++)
     {

@@ -53,7 +53,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
             {
                 if (absolute_relevance[j] > 0)
                 {
-                    result_inner.push_back(RelativeIndex{ .doc_id = j, .rank = ((float)absolute_relevance[j] / *max) });
+                    result_inner.emplace_back(RelativeIndex{ .doc_id = j, .rank = ((float)absolute_relevance[j] / *max) });
                 }
             }
             std::sort(result_inner.begin(), result_inner.end(), [](RelativeIndex& a, RelativeIndex& b)
@@ -65,7 +65,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
         {
             result_inner.resize(response_limit);
         }
-        result.push_back(result_inner);
+        result.emplace_back(result_inner);
     }
 
     std::vector<std::vector<std::pair<int, float>>> result_pairs(result.size());

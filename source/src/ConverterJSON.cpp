@@ -22,7 +22,7 @@ std::vector<std::string> ConverterJSON::GetTextDocuments()
         for (const std::string &f : files)
         {
             std::filesystem::path p = f;
-            file_paths.push_back(p);
+            file_paths.emplace_back(p);
         }
         
         for (const std::filesystem::path &p : file_paths)
@@ -34,7 +34,7 @@ std::vector<std::string> ConverterJSON::GetTextDocuments()
                 {
                     std::string tmp;
                     std::ifstream file(std::filesystem::absolute(p).string());
-                    result.push_back("");
+                    result.emplace_back("");
                     while (getline(file, tmp))
                     {
                         *(result.end() - 1) += (tmp);
@@ -112,7 +112,7 @@ void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> a
                 {
                     rel["docid"] = answers[i][j].first;
                     rel["rank"] = answers[i][j].second;
-                    relevance.push_back(rel);
+                    relevance.emplace_back(rel);
                 }
                 request["relevance"] = relevance;
             }

@@ -11,7 +11,7 @@ void TestInvertedIndexFunctionality(const std::vector<std::string>& docs,
     
     for (auto& request : requests)
     {
-        result.push_back(idx.GetWordCount(request));
+        result.emplace_back(idx.GetWordCount(request));
     }
 
     ASSERT_EQ(result, expected);
