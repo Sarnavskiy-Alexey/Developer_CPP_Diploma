@@ -81,50 +81,5 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
 
     converter.putAnswers(result_pairs);
 
-
-
-
-    // for (size_t i = 0; i < queries_input.size(); i++)
-    // {
-    //     std::stringstream buffer_stream(queries_input[i]);
-    //     std::string word;
-    //     std::set<std::string> words_set;
-
-    //     /* разбитие запроса на отдельные слова и формирование списка уникальных */
-    //     while (buffer_stream >> word)
-    //     {
-    //         if (word.size() < 1)
-    //         {
-    //             break;
-    //         }
-    //         words_set.insert(word);
-    //     }
-
-    //     std::vector<std::string> words(words_set.size());
-    //     InvertedIndex* idx = &this->_index;
-    //     std::copy(words_set.begin(), words_set.end(), words.begin());
-    //     /* сортировка по возрастанию количества встреч слова */
-    //     std::sort(words.begin(), words.end(), [&idx](std::string a, std::string b)
-    //                                                 {
-    //                                                     std::vector<Entry> a_vec = idx->GetWordCount(a);
-    //                                                     std::vector<Entry> b_vec = idx->GetWordCount(a);
-    //                                                     size_t count_a = 0;
-    //                                                     size_t count_b = 0;
-                                                        
-    //                                                     for (const Entry& e : a_vec)
-    //                                                     {
-    //                                                         count_a += e.count;
-    //                                                     }
-                                                        
-    //                                                     for (const Entry& e : b_vec)
-    //                                                     {
-    //                                                         count_b += e.count;
-    //                                                     }
-
-    //                                                     return count_a > count_b;
-    //                                                 }
-    //     );
-    // }
-
     return result;
 }
