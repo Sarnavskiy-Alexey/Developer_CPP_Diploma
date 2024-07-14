@@ -8,10 +8,6 @@
 #include "SearchServer.hpp"
 #include "exceptions.hpp"
 
-#ifdef __TEST_SEARCH_ENGINE__
-#include "tests.hpp"
-#endif /* __TEST_SEARCH_ENGINE__ */
-
 /*! \brief Статическая функция для очистки/создания файла ответов */
 static void clearAnswersJSON()
 {
@@ -26,9 +22,6 @@ int main(void)
 {
     clearAnswersJSON();
     
-#ifdef __TEST_SEARCH_ENGINE__
-    run_tests();
-#else /* __TEST_SEARCH_ENGINE__ */
     try
     {
         /* создать объект-конвертер */
@@ -79,5 +72,4 @@ int main(void)
         std::cerr << X.what() << '\n';
     }
     return 0;
-#endif /* __TEST_SEARCH_ENGINE__ */
 }

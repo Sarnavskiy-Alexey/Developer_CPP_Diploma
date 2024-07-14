@@ -47,7 +47,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
         /* максимальная релевантность */
         auto max = std::max_element(absolute_relevance.begin(), absolute_relevance.end());
         /* рассчитываем относительную релевантность */
-        if (*max != 0)
+        if (max != absolute_relevance.end() && *max != 0)
         {
             for (size_t j = 0; j < absolute_relevance.size(); j++)
             {
