@@ -12,7 +12,7 @@
 #include <vector>
 #include <string>
 
-const std::string relative_path = "../";
+const std::string relative_path = "../../";
 const std::string relative_path_config = relative_path + "appendix/config.json";
 const std::string relative_path_requests = relative_path + "appendix/requests.json";
 const std::string relative_path_answers = relative_path + "appendix/answers.json";

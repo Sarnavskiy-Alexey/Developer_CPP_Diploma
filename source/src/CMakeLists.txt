@@ -1,49 +1,61 @@
-# Минимально требуемая версия CMake
-cmake_minimum_required(VERSION 3.17)
+# Требуемая минимальная версия CMake
+cmake_minimum_required(VERSION 3.30)
 
-# Название и версия проекта
+# Название и версия основного проекта
 project("search_engine" VERSION 1.0)
 
-# Применяемый стандарт C++
-set(CMAKE_CXX_STANDARD 20)
-
-# Включение своих директорий
-include_directories(
-    ../inc
+# Создаем переменную, хранящую пути к файлам
+file(
+    GLOB TARGET_SRC
+    main.cpp
+    ../inc/main.hpp
 )
 
-# Добавление сторонних библиотек
+# Создаем переменную, хранящую пути к заголовочным файлам библиотеки
+file(
+    GLOB HEADER_LIB
+    ../inc/*.hpp
+)
+
+# Создаем переменную, хранящую пути к файлам реализации библиотеки
+file(
+    GLOB SOURCE_LIB
+    ../inc/*((?!main))*.cpp
+)
+
+# Создаем библиотеку для последующего использования (например, в тестах)
+add_library(MySearchEngineLib ${HEADER_LIB} ${SOURCE_LIB})
+
+# Добавляем сторонние библиотеки
 include(FetchContent)
 
-# Отключение модульных тестов для библиотеки json
+# Отключаем модульные тесты для библиотеки json
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 
-# Скачивание nlohmann json из GitHub репозитория
+# Скачиваем nlohmann json из GitHub репозитория (если еще не скачан)
 FetchContent_Declare(
     json
     URL
     https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
 )
 
-# Открытие доступности скаченных из GitHub репозитория данных
+# Открываем доступность скачанных из GitHub репозитория данных
 FetchContent_MakeAvailable(json)
 
-# Добавление своих файлов в проект
+# Добавляем в проект задачу собрать исполняемый файл
 add_executable(
     search_engine
+    ${TARGET_SRC}
+)
 
-    main.cpp
+# Добавляем в библиотеку MySearchEngineLib библиотеку json
+target_link_libraries(
+    MySearchEngineLib
+    nlohmann_json::nlohmann_json
+)
 
-    ../inc/ConverterJSON.hpp
-    ConverterJSON.cpp
-
-    ../inc/InvertedIndex.hpp
-    InvertedIndex.cpp
-
-    ../inc/SearchServer.hpp
-    SearchServer.cpp
-
-    ../inc/exceptions.hpp
-    )
-
-target_link_libraries(search_engine PRIVATE nlohmann_json::nlohmann_json)
+# Добавляем библиотеку MySearchEngineLib в проект
+target_link_libraries(
+    search_engine
+    MySearchEngineLib
+)
