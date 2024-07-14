@@ -25,7 +25,7 @@ std::vector<std::vector<RelativeIndex>> SearchServer::search(const std::vector<s
         /* разбитие запроса на отдельные слова и формирование списка уникальных */
         while (buffer_stream >> word)
         {
-            if (word.size() < 1)
+            if (word.empty())
             {
                 break;
             }

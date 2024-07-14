@@ -29,7 +29,7 @@ void InvertedIndex::UpdateDocumentBase(std::vector<std::string> input_docs)
         while (buffer_stream >> word && word_count < 1000)
         {
             /* если в буфере встретится пустое слово, то закончить обработку буфера */
-            if (word.size() < 1)
+            if (word.empty())
             {
                 break;
             }

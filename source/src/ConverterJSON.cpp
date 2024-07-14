@@ -14,45 +14,44 @@ std::vector<std::string> ConverterJSON::GetTextDocuments()
 {
     std::vector<std::string> result;
 
-    if (CheckConfigJSON())
+    CheckConfigJSON();
+    
+    std::vector<std::string> files = this->config_json_data["files"];
+    std::vector<std::filesystem::path> file_paths;
+    
+    for (const std::string &f : files)
     {
-        std::vector<std::string> files = this->config_json_data["files"];
-        std::vector<std::filesystem::path> file_paths;
-        
-        for (const std::string &f : files)
+        std::filesystem::path p = f;
+        file_paths.emplace_back(p);
+    }
+    
+    for (const std::filesystem::path &p : file_paths)
+    {
+        try
         {
-            std::filesystem::path p = f;
-            file_paths.emplace_back(p);
-        }
-        
-        for (const std::filesystem::path &p : file_paths)
-        {
-            try
+            /* проверка на существование файла из конфигурации */
+            if (std::filesystem::exists(p))
             {
-                /* проверка на существование файла из конфигурации */
-                if (std::filesystem::exists(p))
+                std::string tmp;
+                std::ifstream file(std::filesystem::absolute(p).string());
+                result.emplace_back("");
+                while (getline(file, tmp))
                 {
-                    std::string tmp;
-                    std::ifstream file(std::filesystem::absolute(p).string());
-                    result.emplace_back("");
-                    while (getline(file, tmp))
+                    *(result.end() - 1) += (tmp);
+                    if (!file.eof())
                     {
-                        *(result.end() - 1) += (tmp);
-                        if (!file.eof())
-                        {
-                            *(result.end() - 1) += '\n';
-                        }
+                        *(result.end() - 1) += '\n';
                     }
                 }
-                else
-                {
-                    throw FileNotExistsException(p);
-                }
             }
-            catch (const FileNotExistsException& X)
+            else
             {
-                std::cout << X.what() << std::endl;
+                throw FileNotExistsException(p);
             }
+        }
+        catch (const FileNotExistsException& X)
+        {
+            std::cout << X.what() << std::endl;
         }
     }
 
@@ -63,18 +62,16 @@ int ConverterJSON::GetResponsesLimit()
 {
     std::filesystem::path config_path = relative_path_config;
 
-    if (CheckConfigJSON())
+    CheckConfigJSON();
+
+    if (this->config_json_data["config"].contains("max_responses"))
     {
-        if (this->config_json_data["config"].contains("max_responses"))
-        {
-            return this->config_json_data["config"]["max_responses"];
-        }
-        else
-        {
-            return 5;
-        }
+        return this->config_json_data["config"]["max_responses"];
     }
-    return 0;
+    else
+    {
+        return 5;
+    }
 }
 
 std::vector<std::string> ConverterJSON::GetRequests()
@@ -139,7 +136,7 @@ void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> a
     }
 }
 
-bool ConverterJSON::CheckConfigJSON()
+void ConverterJSON::CheckConfigJSON()
 {
     std::filesystem::path config_path = relative_path_config;
 
@@ -178,8 +175,6 @@ bool ConverterJSON::CheckConfigJSON()
     {
         throw ConfigJSONNotExistsException();
     }
-
-    return true;
 }
 
 bool ConverterJSON::CheckRequestsJSON()
@@ -208,34 +203,30 @@ const std::string ConverterJSON::GetEngineName()
 {
     std::filesystem::path config_path = relative_path_config;
 
-    if (CheckConfigJSON())
+    CheckConfigJSON();
+
+    if (this->config_json_data["config"].contains("name"))
     {
-        if (this->config_json_data["config"].contains("name"))
-        {
-            return this->config_json_data["config"]["name"];
-        }
-        else
-        {
-            return "no name";
-        }
+        return this->config_json_data["config"]["name"];
     }
-    return "no name";
+    else
+    {
+        return "no name";
+    }
 }
 
 const std::string ConverterJSON::GetEngineVersion()
 {
     std::filesystem::path config_path = relative_path_config;
 
-    if (CheckConfigJSON())
+    CheckConfigJSON();
+
+    if (this->config_json_data["config"].contains("version"))
     {
-        if (this->config_json_data["config"].contains("version"))
-        {
-            return this->config_json_data["config"]["version"];
-        }
-        else
-        {
-            return " no version";
-        }
+        return this->config_json_data["config"]["version"];
     }
-    return " no version";
+    else
+    {
+        return " no version";
+    }
 }

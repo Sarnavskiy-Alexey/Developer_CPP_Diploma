@@ -46,7 +46,7 @@ public:
     const std::string GetEngineVersion();
 private:
     /*! \brief Метод для проверки содержимого файла config.json */
-    bool CheckConfigJSON();
+    void CheckConfigJSON();
     
     /*! \brief Метод для проверки содержимого файла requests.json */
     bool CheckRequestsJSON();
